@@ -1,0 +1,82 @@
+.pc-about {
+  position: relative;
+  padding: 64px 8vw;
+  background: var(--pink);
+  overflow: hidden;
+}
+
+@media (max-width: 860px) {
+  .pc-about {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.pc-about-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image: repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.35) 0px,
+      rgba(255, 255, 255, 0.35) 8px,
+      transparent 8px,
+      transparent 20px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.35) 0px,
+      rgba(255, 255, 255, 0.35) 8px,
+      transparent 8px,
+      transparent 20px
+    );
+}
+
+.pc-about-inner {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-items: center;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.pc-about-art {
+  flex: 1 1 260px;
+  min-width: 240px;
+  display: flex;
+  justify-content: center;
+}
+
+.pc-about-art img {
+  width: min(100%, 280px);
+  filter: drop-shadow(0 14px 24px rgba(107, 53, 31, 0.25));
+}
+
+.pc-about-copy {
+  flex: 1 1 320px;
+  min-width: 260px;
+}
+
+.pc-about-copy h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 4vw, 36px);
+  color: var(--cream);
+  margin: 0 0 14px;
+  text-shadow: 0 2px 6px rgba(107, 53, 31, 0.15);
+}
+
+.pc-about-copy p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--brown-dark);
+  margin: 0 0 12px;
+}
+
+.pc-about-signature {
+  font-family: var(--font-hand);
+  font-size: 18px;
+  color: var(--cream);
+}

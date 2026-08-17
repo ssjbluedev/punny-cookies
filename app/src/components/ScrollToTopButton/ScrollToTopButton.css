@@ -1,0 +1,23 @@
+.pc-scroll-top {
+  position: fixed;
+  right: 20px;
+  bottom: 22px;
+  z-index: 200;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px dashed var(--pink);
+  background: var(--coral);
+  color: var(--cream);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(217, 79, 93, 0.35);
+  animation: pf-fade 0.2s ease;
+}
+
+.pc-scroll-top-mobile {
+  bottom: 88px;
+}

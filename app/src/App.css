@@ -1,0 +1,30 @@
+.pc-page {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Shared button base — components add a size modifier (pc-btn-large, pc-btn-small, pc-btn-full, ...) */
+.pc-btn {
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  cursor: pointer;
+}
+
+.pc-btn-primary {
+  background: var(--coral);
+  color: var(--cream);
+  font-weight: 700;
+}
+
+.pc-btn-outline {
+  background: transparent;
+  color: var(--rose);
+  border: 2px solid var(--rose);
+  font-family: var(--font-display);
+  font-weight: 700;
+}

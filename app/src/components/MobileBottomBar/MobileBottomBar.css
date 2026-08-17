@@ -1,0 +1,37 @@
+.pc-bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 150;
+  display: flex;
+  background: var(--cream);
+  border-top: 2px dashed var(--pink);
+  box-shadow: 0 -6px 16px rgba(107, 53, 31, 0.12);
+}
+
+.pc-bottom-bar-btn {
+  flex: 1;
+  background: var(--cream);
+  color: var(--text);
+  border: none;
+  padding: 10px 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.pc-bottom-bar-btn-primary {
+  background: var(--coral);
+  color: var(--cream);
+}
+
+.pc-bottom-bar-sub {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.9;
+}

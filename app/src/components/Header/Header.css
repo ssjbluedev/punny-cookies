@@ -1,0 +1,125 @@
+.pc-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 24px;
+  background: rgba(255, 247, 234, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 2px dashed var(--pink);
+}
+
+@media (max-width: 860px) {
+  .pc-header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+.pc-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.pc-brand-logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 3px 10px rgba(217, 79, 93, 0.25);
+}
+
+.pc-brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--rose);
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 860px) {
+  .pc-brand-name {
+    display: none;
+  }
+}
+
+.pc-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pc-icon-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 2px dashed var(--pink);
+  background: var(--cream);
+  font-size: 19px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pc-cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: var(--coral);
+  color: var(--cream);
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 999px;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.pc-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.pc-nav-link {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.pc-btn-nav {
+  padding: 12px 22px;
+  font-size: 15px;
+  box-shadow: 0 4px 14px rgba(240, 106, 115, 0.35);
+}
+
+.pc-mobile-nav {
+  position: sticky;
+  top: 70px;
+  z-index: 99;
+  background: var(--cream);
+  border-bottom: 2px dashed var(--pink);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 8px 16px rgba(107, 53, 31, 0.08);
+}
+
+.pc-mobile-nav-link {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+}

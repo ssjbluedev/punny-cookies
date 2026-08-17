@@ -1,0 +1,17 @@
+.pc-toast {
+  position: fixed;
+  top: 84px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 400;
+  background: var(--brown-dark);
+  color: var(--bg);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 8px 20px rgba(107, 53, 31, 0.3);
+  animation: pf-fade 0.2s ease;
+  white-space: nowrap;
+}

@@ -1,0 +1,77 @@
+:root {
+  --bg: #fff7ea;
+  --cream: #fff9f0;
+  --peach-light: #fdede7;
+  --pink: #f9c6c4;
+  --coral: #f06a73;
+  --rose: #d94f5d;
+  --gold: #eba65f;
+  --green: #b5be69;
+  --text: #6b4638;
+  --text-soft: #8a6857;
+  --brown-dark: #6b351f;
+
+  --font-display: "Baloo 2", sans-serif;
+  --font-body: "Quicksand", sans-serif;
+  --font-hand: "Patrick Hand", cursive;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+}
+
+@keyframes pf-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--r, 0deg));
+  }
+  50% {
+    transform: translateY(-10px) rotate(var(--r, 0deg));
+  }
+}
+
+@keyframes pf-modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pf-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

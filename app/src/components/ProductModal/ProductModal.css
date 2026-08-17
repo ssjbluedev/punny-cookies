@@ -1,0 +1,114 @@
+.pc-product-modal-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--peach-light);
+  margin-bottom: 16px;
+}
+
+.pc-product-modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pc-product-modal-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+}
+
+.pc-product-modal-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.pc-product-modal-desc {
+  font-size: 15px;
+  color: var(--text-soft);
+  margin-bottom: 8px;
+}
+
+.pc-product-modal-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--coral);
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+
+.pc-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.pc-qty-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.pc-qty-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 2px dashed var(--pink);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.pc-qty-control span {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.pc-qty-control button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  font-size: 16px;
+}
+
+.pc-qty-control button:first-child {
+  background: var(--pink);
+  color: var(--text);
+}
+
+.pc-qty-control button:last-child {
+  background: var(--coral);
+  color: var(--cream);
+}
+
+.pc-textarea {
+  width: 100%;
+  min-height: 64px;
+  border: 2px dashed var(--pink);
+  border-radius: 14px;
+  padding: 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text);
+  resize: vertical;
+  margin-bottom: 18px;
+  background: #ffffff;
+}
+
+.pc-btn-full {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  color: var(--cream);
+  box-shadow: 0 6px 16px rgba(240, 106, 115, 0.3);
+}

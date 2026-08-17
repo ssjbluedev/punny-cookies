@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&amp;family=Quicksand:wght@400;500;600;700&amp;family=Patrick+Hand&amp;display=swap" rel="stylesheet" />
+  <script src="./image-slot.js"></script>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    @keyframes pf-float { 0%,100% { transform: translateY(0) rotate(var(--r,0deg)); } 50% { transform: translateY(-10px) rotate(var(--r,0deg)); } }
+    @keyframes pf-modal-in { from { opacity: 0; transform: scale(0.92) translateY(12px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    @keyframes pf-fade { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</helmet>
+
+<div style="font-family:'Quicksand',sans-serif;background:#FFF7EA;color:#6B4638;position:relative;overflow-x:hidden;min-height:100vh;padding-bottom:{{ bottomPad }}">
+
+  <!-- HEADER -->
+  <header style="position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 24px;background:rgba(255,247,234,0.88);backdrop-filter:blur(10px);border-bottom:2px dashed #F9C6C4">
+    <div style="display:flex;align-items:center;gap:10px;cursor:pointer" onClick="{{ scrollToTop }}">
+      <img src="assets/logo-small.png" alt="Punny Cookies logo" style="width:46px;height:46px;border-radius:50%;object-fit:cover;box-shadow:0 3px 10px rgba(217,79,93,0.25)" />
+      <span style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:22px;color:#D94F5D;letter-spacing:0.2px">Punny Cookies</span>
+    </div>
+
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:8px">
+        <button onClick="{{ openCart }}" aria-label="Giỏ hàng" style="position:relative;width:44px;height:44px;border-radius:14px;border:2px dashed #F9C6C4;background:#FFF9F0;font-size:19px;color:#6B4638;display:flex;align-items:center;justify-content:center">
+          🧺
+          <sc-if value="{{ cartCount }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;top:-6px;right:-6px;background:#F06A73;color:#FFF9F0;font-size:11px;font-weight:700;border-radius:999px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;padding:0 4px">{{ cartCount }}</span>
+          </sc-if>
+        </button>
+        <button onClick="{{ scrollToMenu }}" style="background:#F06A73;color:#FFF9F0;border:none;border-radius:999px;padding:10px 16px;font-family:'Baloo 2',sans-serif;font-weight:600;font-size:14px;white-space:nowrap;box-shadow:0 4px 12px rgba(240,106,115,0.35)">Đặt bánh ♡</button>
+        <button onClick="{{ toggleMobileNav }}" aria-label="Menu" style="width:44px;height:44px;border-radius:14px;border:2px dashed #F9C6C4;background:#FFF9F0;font-size:20px;color:#6B4638;display:flex;align-items:center;justify-content:center">☰</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDesktopNav }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:28px">
+        <a href="#menu" onClick="{{ navMenu }}" style="color:#6B4638;text-decoration:none;font-weight:600;font-size:15px">Thực đơn</a>
+        <a href="#how" onClick="{{ navHow }}" style="color:#6B4638;text-decoration:none;font-weight:600;font-size:15px">Cách đặt</a>
+        <a href="#about" onClick="{{ navAbout }}" style="color:#6B4638;text-decoration:none;font-weight:600;font-size:15px">Về Punny</a>
+        <a href="#contact" onClick="{{ navContact }}" style="color:#6B4638;text-decoration:none;font-weight:600;font-size:15px">Liên hệ</a>
+        <button onClick="{{ openCart }}" aria-label="Giỏ hàng" style="position:relative;width:44px;height:44px;border-radius:14px;border:2px dashed #F9C6C4;background:#FFF9F0;font-size:19px;color:#6B4638;display:flex;align-items:center;justify-content:center;cursor:pointer">
+          🧺
+          <sc-if value="{{ cartCount }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;top:-6px;right:-6px;background:#F06A73;color:#FFF9F0;font-size:11px;font-weight:700;border-radius:999px;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;padding:0 4px">{{ cartCount }}</span>
+          </sc-if>
+        </button>
+        <button onClick="{{ scrollToMenu }}" style="background:#F06A73;color:#FFF9F0;border:none;border-radius:999px;padding:12px 22px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 4px 14px rgba(240,106,115,0.35)">Đặt bánh ♡</button>
+      </nav>
+    </sc-if>
+  </header>
+
+  <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:sticky;top:70px;z-index:99;background:#FFF9F0;border-bottom:2px dashed #F9C6C4;padding:16px 24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 8px 16px rgba(107,53,31,0.08)">
+      <a href="#menu" onClick="{{ navMenu }}" style="color:#6B4638;text-decoration:none;font-weight:700;font-size:16px">Thực đơn</a>
+      <a href="#how" onClick="{{ navHow }}" style="color:#6B4638;text-decoration:none;font-weight:700;font-size:16px">Cách đặt</a>
+      <a href="#about" onClick="{{ navAbout }}" style="color:#6B4638;text-decoration:none;font-weight:700;font-size:16px">Về Punny</a>
+      <a href="#contact" onClick="{{ navContact }}" style="color:#6B4638;text-decoration:none;font-weight:700;font-size:16px">Liên hệ</a>
+    </div>
+  </sc-if>
+
+  <!-- HERO -->
+  <section id="hero" style="position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:48px;padding:64px 8vw 56px;overflow:hidden">
+    <div style="position:absolute;top:-80px;right:-80px;width:280px;height:280px;border-radius:50%;background:#F9C6C4;opacity:0.35;filter:blur(10px)"></div>
+    <div style="position:absolute;bottom:-60px;left:-60px;width:220px;height:220px;border-radius:50%;background:#EBA65F;opacity:0.18;filter:blur(10px)"></div>
+
+    <div style="flex:1 1 420px;min-width:300px;position:relative;z-index:1">
+      <span style="font-family:'Patrick Hand',cursive;color:#F06A73;font-size:20px">MADE WITH LOVE ♡</span>
+      <h1 style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:clamp(42px,7vw,72px);line-height:1.05;margin:8px 0 4px;color:#D94F5D">Punny Cookies</h1>
+      <p style="font-family:'Baloo 2',sans-serif;font-weight:600;font-size:20px;color:#EBA65F;margin:0 0 16px">Cookies • Mochi • Sweet Treats</p>
+      <p style="font-size:17px;line-height:1.6;color:#6B4638;max-width:440px;margin:0 0 28px">Những chiếc bánh nhỏ xinh, làm bằng thật nhiều yêu thương.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px">
+        <button onClick="{{ scrollToMenu }}" style="background:#F06A73;color:#FFF9F0;border:none;border-radius:999px;padding:16px 30px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 6px 18px rgba(240,106,115,0.35)">Đặt bánh ngay ♡</button>
+        <button onClick="{{ scrollToMenu }}" style="background:transparent;color:#D94F5D;border:2px solid #D94F5D;border-radius:999px;padding:14px 28px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;cursor:pointer">Xem menu</button>
+      </div>
+    </div>
+
+    <div style="flex:1 1 340px;min-width:280px;position:relative;display:flex;justify-content:center;z-index:1">
+      <div style="position:relative;width:min(100%,420px)">
+        <img src="assets/bunny-hero.png" alt="Bunny mascot eating a cookie" style="width:100%;display:block;filter:drop-shadow(0 18px 30px rgba(217,79,93,0.25))" />
+        <img src="assets/hero-bow-accent.png" alt="" style="position:absolute;top:2%;left:2%;width:15%;--r:-10deg;animation:pf-float 4.5s ease-in-out infinite;filter:drop-shadow(0 6px 10px rgba(217,79,93,0.2))" />
+        <span style="position:absolute;top:6%;right:2%;font-size:26px;color:#F06A73;--r:0deg;animation:pf-float 3.6s ease-in-out infinite">✦</span>
+        <span style="position:absolute;bottom:20%;left:0;font-size:22px;color:#D94F5D;--r:0deg;animation:pf-float 4s ease-in-out infinite">♡</span>
+        <div style="position:absolute;bottom:-6%;right:-8%;background:#FFF9F0;border:2px dashed #D94F5D;border-radius:16px;padding:8px 16px;transform:rotate(6deg);box-shadow:0 6px 14px rgba(107,53,31,0.12)">
+          <span style="font-family:'Patrick Hand',cursive;font-size:16px;color:#6B4638">homemade with love</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="height:22px;width:100%;background:#FFF9F0;-webkit-mask-image:radial-gradient(circle at 11px 0,transparent 11px,black 11.5px);-webkit-mask-size:22px 22px;-webkit-mask-repeat:repeat-x;mask-image:radial-gradient(circle at 11px 0,transparent 11px,black 11.5px);mask-size:22px 22px;mask-repeat:repeat-x"></div>
+
+  <!-- MENU -->
+  <section id="menu" style="background:#FFF9F0;padding:56px 8vw 72px">
+    <div style="text-align:center;max-width:560px;margin:0 auto 32px">
+      <h2 style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:clamp(28px,4vw,40px);color:#D94F5D;margin:0 0 10px">Hôm nay ăn gì nhỉ? ♡</h2>
+      <p style="font-size:16px;color:#6B4638;margin:0">Những món ngọt nhỏ xinh được làm theo order.</p>
+    </div>
+
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-bottom:36px">
+      <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="3">
+        <button onClick="{{ cat.select }}" style="border-radius:999px;padding:10px 22px;font-family:'Baloo 2',sans-serif;font-weight:600;font-size:14px;cursor:pointer;background:{{ cat.bg }};color:{{ cat.color }};border:2px dashed {{ cat.border }}">{{ cat.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px;max-width:1200px;margin:0 auto">
+      <sc-for list="{{ filteredProducts }}" as="p" hint-placeholder-count="6">
+        <div style="background:#FFFFFF;border:2px dashed #F9C6C4;border-radius:26px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 6px 16px rgba(107,53,31,0.06);transition:transform 0.2s ease, box-shadow 0.2s ease" style-hover="transform:translateY(-6px);box-shadow:0 14px 26px rgba(217,79,93,0.18)">
+          <div style="aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:#FDEDE7">
+            <sc-if value="{{ p.image }}" hint-placeholder-val="{{ true }}">
+              <img src="{{ p.image }}" alt="{{ p.name }}" style="width:100%;height:100%;object-fit:cover" />
+            </sc-if>
+            <sc-if value="{{ p.noImage }}" hint-placeholder-val="{{ false }}">
+              <image-slot id="{{ p.id }}" shape="rect" placeholder="{{ p.name }}"></image-slot>
+            </sc-if>
+          </div>
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:17px;color:#6B4638">{{ p.emoji }} {{ p.name }}</div>
+          <div style="font-size:14px;color:#8A6857;flex:1;min-height:20px">{{ p.desc }}</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:4px">
+            <span style="font-family:'Baloo 2',sans-serif;font-weight:700;color:#F06A73;font-size:16px">{{ p.priceLabel }}</span>
+            <button onClick="{{ p.open }}" style="background:#F06A73;color:#FFF9F0;border:none;border-radius:999px;padding:9px 18px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13px;cursor:pointer">Đặt bánh</button>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- PRODUCT MODAL -->
+  <sc-if value="{{ modalProduct }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;background:rgba(107,53,31,0.38);backdrop-filter:blur(2px);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;animation:pf-fade 0.2s ease">
+      <div onClick="{{ stopClick }}" style="background:#FFF9F0;border-radius:28px;max-width:460px;width:100%;max-height:88vh;overflow:auto;padding:24px;position:relative;animation:pf-modal-in 0.25s ease;box-shadow:0 20px 50px rgba(107,53,31,0.3)">
+        <button onClick="{{ closeModal }}" aria-label="Đóng" style="position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:none;background:#F9C6C4;color:#6B4638;font-size:16px;cursor:pointer">✕</button>
+
+        <sc-if value="{{ isStepDetail }}" hint-placeholder-val="{{ true }}">
+          <div style="width:100%;aspect-ratio:1/1;border-radius:20px;overflow:hidden;background:#FDEDE7;margin-bottom:16px">
+            <sc-if value="{{ modalProduct.image }}" hint-placeholder-val="{{ true }}">
+              <img src="{{ modalProduct.image }}" alt="{{ modalProduct.name }}" style="width:100%;height:100%;object-fit:cover" />
+            </sc-if>
+            <sc-if value="{{ modalProduct.noImage }}" hint-placeholder-val="{{ false }}">
+              <image-slot id="{{ modalDetailSlotId }}" shape="rect" placeholder="{{ modalProduct.name }}"></image-slot>
+            </sc-if>
+          </div>
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:22px;color:#6B4638;margin-bottom:4px">{{ modalProduct.emoji }} {{ modalProduct.name }}</div>
+          <div style="font-size:15px;color:#8A6857;margin-bottom:8px">{{ modalProduct.desc }}</div>
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:700;color:#F06A73;font-size:18px;margin-bottom:18px">{{ modalProduct.priceLabel }}</div>
+
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+            <span style="font-weight:600;font-size:14px;color:#6B4638">Số lượng</span>
+            <div style="display:flex;align-items:center;gap:12px;border:2px dashed #F9C6C4;border-radius:999px;padding:6px 14px">
+              <button onClick="{{ decQty }}" style="width:28px;height:28px;border-radius:50%;border:none;background:#F9C6C4;color:#6B4638;font-size:16px;cursor:pointer">−</button>
+              <span style="min-width:20px;text-align:center;font-weight:700;color:#6B4638">{{ qty }}</span>
+              <button onClick="{{ incQty }}" style="width:28px;height:28px;border-radius:50%;border:none;background:#F06A73;color:#FFF9F0;font-size:16px;cursor:pointer">+</button>
+            </div>
+          </div>
+
+          <textarea value="{{ itemNote }}" onChange="{{ onItemNoteChange }}" placeholder="Ghi chú (không bắt buộc) — vd: ít ngọt, gói quà..." style="width:100%;min-height:64px;border:2px dashed #F9C6C4;border-radius:14px;padding:12px;font-family:'Quicksand',sans-serif;font-size:14px;color:#6B4638;resize:vertical;margin-bottom:18px;background:#FFFFFF"></textarea>
+
+          <button onClick="{{ addToCart }}" style="width:100%;background:#F06A73;color:#FFF9F0;border:none;border-radius:999px;padding:15px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 6px 16px rgba(240,106,115,0.3)">Thêm vào giỏ ♡</button>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ADDED TO CART TOAST -->
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;top:84px;left:50%;transform:translateX(-50%);z-index:400;background:#6B351F;color:#FFF7EA;padding:12px 22px;border-radius:999px;font-family:'Baloo 2',sans-serif;font-weight:600;font-size:14px;box-shadow:0 8px 20px rgba(107,53,31,0.3);animation:pf-fade 0.2s ease">{{ toast }}</div>
+  </sc-if>
+
+  <!-- CART MODAL -->
+  <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCartModal }}" style="position:fixed;inset:0;background:rgba(107,53,31,0.38);backdrop-filter:blur(2px);z-index:300;display:flex;align-items:center;justify-content:center;padding:20px;animation:pf-fade 0.2s ease">
+      <div onClick="{{ stopClick }}" style="background:#FFF9F0;border-radius:28px;max-width:480px;width:100%;max-height:88vh;overflow:auto;padding:24px;position:relative;animation:pf-modal-in 0.25s ease;box-shadow:0 20px 50px rgba(107,53,31,0.3)">
+        <button onClick="{{ closeCartModal }}" aria-label="Đóng" style="position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:none;background:#F9C6C4;color:#6B4638;font-size:16px;cursor:pointer">✕</button>
+
+        <sc-if value="{{ isCartStepList }}" hint-placeholder-val="{{ true }}">
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:20px;color:#6B4638;margin-bottom:16px">Giỏ hàng của bạn 🧺</div>
+
+          <sc-if value="{{ cartIsEmpty }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:14px;color:#8A6857;text-align:center;padding:24px 0">Giỏ hàng đang trống. Chọn vài món ngọt nhé ♡</p>
+          </sc-if>
+
+          <sc-for list="{{ cartItems }}" as="item" hint-placeholder-count="2">
+            <div style="display:flex;gap:12px;align-items:center;border:2px dashed #F9C6C4;border-radius:18px;padding:10px;margin-bottom:12px">
+              <div style="width:56px;height:56px;border-radius:12px;overflow:hidden;background:#FDEDE7;flex:0 0 auto">
+                <sc-if value="{{ item.image }}" hint-placeholder-val="{{ true }}">
+                  <img src="{{ item.image }}" alt="{{ item.name }}" style="width:100%;height:100%;object-fit:cover" />
+                </sc-if>
+              </div>
+              <div style="flex:1;min-width:0">
+                <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:15px;color:#6B4638">{{ item.emoji }} {{ item.name }}</div>
+                <div style="font-size:13px;color:#F06A73;font-weight:700">{{ item.priceLabel }}</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <button onClick="{{ item.dec }}" style="width:24px;height:24px;border-radius:50%;border:none;background:#F9C6C4;color:#6B4638;font-size:14px;cursor:pointer">−</button>
+                <span style="min-width:16px;text-align:center;font-weight:700;color:#6B4638;font-size:14px">{{ item.qty }}</span>
+                <button onClick="{{ item.inc }}" style="width:24px;height:24px;border-radius:50%;border:none;background:#F06A73;color:#FFF9F0;font-size:14px;cursor:pointer">+</button>
+              </div>
+              <button onClick="{{ item.remove }}" aria-label="Xoá" style="border:none;background:transparent;color:#B08070;font-size:16px;cursor:pointer;padding:0 2px">✕</button>
+            </div>
+          </sc-for>
+
+          <sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;justify-content:space-between;align-items:center;border-top:2px dashed #F9C6C4;padding-top:14px;margin-top:6px;margin-bottom:18px">
+              <span style="font-weight:600;color:#6B4638;font-size:15px">Tổng cộng</span>
+              <span style="font-family:'Baloo 2',sans-serif;font-weight:700;color:#F06A73;font-size:18px">{{ cartTotalLabel }}</span>
+            </div>
+            <button onClick="{{ goToCartForm }}" style="width:100%;background:#F06A73;color:#FFF9F0;border:none;border-radius:999px;padding:15px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 6px 16px rgba(240,106,115,0.3)">Tiếp tục đặt bánh ♡</button>
+          </sc-if>
+        </sc-if>
+
+        <sc-if value="{{ isCartStepForm }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:20px;color:#6B4638;margin-bottom:14px">Thông tin đặt bánh</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <label style="font-size:13px;font-weight:600;color:#8A6857">Họ tên
+              <input value="{{ form.name }}" onChange="{{ onFormChange_name }}" placeholder="Nguyễn A" style="width:100%;margin-top:4px;border:2px dashed #F9C6C4;border-radius:12px;padding:10px 12px;font-family:'Quicksand',sans-serif;font-size:14px;color:#6B4638;background:#FFFFFF" />
+            </label>
+            <label style="font-size:13px;font-weight:600;color:#8A6857">Số điện thoại
+              <input value="{{ form.phone }}" onChange="{{ onFormChange_phone }}" placeholder="09xxxxxxxx" style="width:100%;margin-top:4px;border:2px dashed #F9C6C4;border-radius:12px;padding:10px 12px;font-family:'Quicksand',sans-serif;font-size:14px;color:#6B4638;background:#FFFFFF" />
+            </label>
+            <div style="font-size:13px;font-weight:600;color:#8A6857;background:#FDEDE7;border-radius:12px;padding:10px 12px;white-space:pre-line">Sản phẩm:
+{{ cartLinesText }}</div>
+            <label style="font-size:13px;font-weight:600;color:#8A6857">Ngày muốn nhận bánh
+              <input type="date" value="{{ form.date }}" onChange="{{ onFormChange_date }}" style="width:100%;margin-top:4px;border:2px dashed #F9C6C4;border-radius:12px;padding:10px 12px;font-family:'Quicksand',sans-serif;font-size:14px;color:#6B4638;background:#FFFFFF" />
+            </label>
+            <label style="font-size:13px;font-weight:600;color:#8A6857">Phương thức nhận bánh
+              <select value="{{ form.method }}" onChange="{{ onFormChange_method }}" style="width:100%;margin-top:4px;border:2px dashed #F9C6C4;border-radius:12px;padding:10px 12px;font-family:'Quicksand',sans-serif;font-size:14px;color:#6B4638;background:#FFFFFF">
+                <option value="Tự đến lấy">Tự đến lấy</option>
+                <option value="Giao tận nơi">Giao tận nơi</option>
+              </select>
+            </label>
+            <label style="font-size:13px;font-weight:600;color:#8A6857">Ghi chú
+              <textarea value="{{ orderNote }}" onChange="{{ onOrderNoteChange }}" style="width:100%;margin-top:4px;min-height:56px;border:2px dashed #F9C6C4;border-radius:12px;padding:10px 12px;font-family:'Quicksand',sans-serif;font-size:14px;color:#6B4638;background:#FFFFFF;resize:vertical"></textarea>
+            </label>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:18px">
+            <button onClick="{{ backToCart }}" style="flex:0 0 auto;background:transparent;border:2px solid #D94F5D;color:#D94F5D;border-radius:999px;padding:14px 18px;font-family:'Baloo 2',sans-serif;font-weight:700;cursor:pointer">←</button>
+            <button onClick="{{ goToCartSummary }}" style="flex:1;background:#F06A73;color:#FFF9F0;border:none;border-radius:999px;padding:14px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:15px;cursor:pointer">Xem đơn hàng ♡</button>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isCartStepSummary }}" hint-placeholder-val="{{ false }}">
+          <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:20px;color:#6B4638;margin-bottom:14px">Đơn hàng của bạn</div>
+          <pre style="white-space:pre-wrap;font-family:'Quicksand',sans-serif;font-size:14px;line-height:1.7;color:#6B4638;background:#FDEDE7;border:2px dashed #F06A73;border-radius:16px;padding:16px;margin:0 0 16px">{{ summaryText }}</pre>
+          <button onClick="{{ copySummary }}" style="width:100%;background:#FFFFFF;border:2px solid #D94F5D;color:#D94F5D;border-radius:999px;padding:13px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:14px;cursor:pointer;margin-bottom:10px">{{ copyLabel }}</button>
+          <button onClick="{{ openFacebook }}" style="width:100%;background:#F06A73;color:#FFF9F0;border:none;border-radius:999px;padding:15px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:15px;cursor:pointer;margin-bottom:10px;box-shadow:0 6px 16px rgba(240,106,115,0.3)">Tiếp tục đặt bánh qua Facebook ♡</button>
+          <button onClick="{{ openZalo }}" style="width:100%;background:transparent;color:#6B4638;border:2px dashed #B5BE69;border-radius:999px;padding:13px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:14px;cursor:pointer;margin-bottom:8px">Liên hệ qua Zalo</button>
+          <p style="font-size:12px;color:#8A6857;text-align:center;margin:6px 0 0">Copy đơn hàng rồi dán vào Messenger khi Punny nhắn lại nhé ♡</p>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- HOW TO ORDER -->
+  <section id="how" style="padding:64px 8vw;background:#FFF7EA">
+    <div style="text-align:center;max-width:520px;margin:0 auto 44px">
+      <h2 style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:clamp(26px,4vw,36px);color:#D94F5D;margin:0">Đặt bánh dễ lắm ♡</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;max-width:980px;margin:0 auto">
+      <div style="background:#FFF9F0;border:2px dashed #F9C6C4;border-radius:24px;padding:28px 22px;text-align:center">
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:34px;color:#F9C6C4;margin-bottom:8px">01</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:18px;color:#6B4638;margin-bottom:6px">Chọn bánh 🍪</div>
+        <div style="font-size:14px;color:#8A6857">Chọn những món bạn thích.</div>
+      </div>
+      <div style="background:#FFF9F0;border:2px dashed #F9C6C4;border-radius:24px;padding:28px 22px;text-align:center">
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:34px;color:#F9C6C4;margin-bottom:8px">02</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:18px;color:#6B4638;margin-bottom:6px">Gửi order 💌</div>
+        <div style="font-size:14px;color:#8A6857">Điền thông tin và gửi đơn qua Facebook.</div>
+      </div>
+      <div style="background:#FFF9F0;border:2px dashed #F9C6C4;border-radius:24px;padding:28px 22px;text-align:center">
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:800;font-size:34px;color:#F9C6C4;margin-bottom:8px">03</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:18px;color:#6B4638;margin-bottom:6px">Punny xác nhận ♡</div>
+        <div style="font-size:14px;color:#8A6857">Store sẽ nhắn lại để xác nhận đơn và thời gian nhận bánh.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" style="position:relative;padding:64px 8vw;background:#F9C6C4;overflow:hidden">
+    <div style="position:absolute;inset:0;opacity:0.5;background-image:repeating-linear-gradient(0deg,rgba(255,255,255,0.35) 0px,rgba(255,255,255,0.35) 8px,transparent 8px,transparent 20px),repeating-linear-gradient(90deg,rgba(255,255,255,0.35) 0px,rgba(255,255,255,0.35) 8px,transparent 8px,transparent 20px)"></div>
+    <div style="position:relative;display:flex;flex-wrap:wrap-reverse;align-items:center;gap:40px;max-width:1000px;margin:0 auto">
+      <div style="flex:1 1 260px;min-width:240px;display:flex;justify-content:center">
+        <img src="assets/bunny-small.png" alt="Bunny mascot" style="width:min(100%,280px);filter:drop-shadow(0 14px 24px rgba(107,53,31,0.25))" />
+      </div>
+      <div style="flex:1 1 320px;min-width:260px">
+        <h2 style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:clamp(26px,4vw,36px);color:#FFF9F0;margin:0 0 14px;text-shadow:0 2px 6px rgba(107,53,31,0.15)">Made with love ♡</h2>
+        <p style="font-size:16px;line-height:1.7;color:#6B351F;margin:0 0 12px">Punny Cookies là một tiệm bánh nhỏ, nơi mỗi chiếc cookie và mochi được làm thủ công với thật nhiều yêu thương.</p>
+        <span style="font-family:'Patrick Hand',cursive;font-size:18px;color:#FFF9F0">— Punny Cookies</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" style="padding:64px 8vw;background:#FFF9F0;text-align:center">
+    <h2 style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:clamp(26px,4vw,36px);color:#D94F5D;margin:0 0 12px">Let's make your day a little sweeter ♡</h2>
+    <p style="font-size:16px;color:#6B4638;max-width:480px;margin:0 auto 36px">Muốn đặt bánh, hỏi menu hay chỉ muốn nói chuyện với Punny?</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:22px;max-width:680px;margin:0 auto">
+      <div onClick="{{ openFacebook }}" style="cursor:pointer;flex:1 1 260px;background:#FFFFFF;border:2px dashed #F06A73;border-radius:26px;padding:30px 24px;box-shadow:0 8px 20px rgba(107,53,31,0.08)">
+<div style="font-size:34px;margin-bottom:10px">📩</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:18px;color:#6B4638;margin-bottom:6px">Facebook Messenger</div>
+        <div style="font-size:14px;color:#8A6857">Đặt bánh &amp; hỏi menu</div>
+      </div>
+      <div onClick="{{ openZalo }}" style="cursor:pointer;flex:1 1 260px;background:#FFFFFF;border:2px dashed #B5BE69;border-radius:26px;padding:30px 24px;box-shadow:0 8px 20px rgba(107,53,31,0.08)">
+<div style="font-size:34px;margin-bottom:10px">💬</div>
+        <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:18px;color:#6B4638;margin-bottom:6px">Zalo</div>
+        <div style="font-size:14px;color:#8A6857">Tư vấn &amp; đặt bánh</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#6B351F;color:#FFF7EA;text-align:center;padding:36px 24px {{ footerBottomPad }}">
+    <div style="font-family:'Baloo 2',sans-serif;font-weight:700;font-size:20px;margin-bottom:6px">Punny Cookies</div>
+    <div style="font-size:14px;opacity:0.85;margin-bottom:6px">Cookies • Mochi • Sweet Treats</div>
+    <div style="font-size:14px;opacity:0.85;margin-bottom:14px">Made with love ♡</div>
+    <div style="display:flex;justify-content:center;gap:16px;margin-bottom:14px">
+      <a href="javascript:void(0)" onClick="{{ openFacebook }}" style="color:#F9C6C4;text-decoration:none;font-size:14px;font-weight:600">Facebook</a>
+      <span style="opacity:0.5">·</span>
+      <a href="javascript:void(0)" onClick="{{ openZalo }}" style="color:#F9C6C4;text-decoration:none;font-size:14px;font-weight:600">Zalo</a>
+    </div>
+    <div style="font-size:12px;opacity:0.6">© 2026 Punny Cookies</div>
+  </footer>
+
+  <!-- MOBILE BOTTOM BAR -->
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;bottom:0;left:0;right:0;z-index:150;display:flex;background:#FFF9F0;border-top:2px dashed #F9C6C4;box-shadow:0 -6px 16px rgba(107,53,31,0.12)">
+      <button onClick="{{ openFacebook }}" style="flex:1;background:#F06A73;color:#FFF9F0;border:none;padding:10px 8px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:2px">
+<span>📩 Facebook</span>
+        <span style="font-size:11px;font-weight:500;opacity:0.9">Đặt bánh</span>
+      </button>
+      <button onClick="{{ openZalo }}" style="flex:1;background:#FFF9F0;color:#6B4638;border:none;padding:10px 8px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:2px">
+<span>💬 Zalo</span>
+        <span style="font-size:11px;font-weight:500;opacity:0.8">Liên hệ</span>
+      </button>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const FACEBOOK_PAGE_URL = "https://m.me/PunnyCookies"; // placeholder
+const ZALO_CONTACT_URL = "https://zalo.me/PunnyCookies"; // placeholder
+
+const PRODUCTS = [
+  { id: "p1", category: "cookie", emoji: "🍪", name: "Chocolate Chip", desc: "Soft • Chewy • Chocolatey", price: 35000, image: "assets/cookie-chocolate-chip.png" },
+  { id: "p2", category: "cookie", emoji: "🍵", name: "Matcha White Chocolate", desc: "Trà xanh béo ngậy, phủ chocolate trắng", price: 42000, image: "assets/cookie-matcha.png" },
+  { id: "p3", category: "cookie", emoji: "🍓", name: "Strawberry Cream", desc: "Vị dâu ngọt dịu, kem béo mềm", price: 40000, image: null },
+  { id: "p4", category: "cookie", emoji: "🍫", name: "Double Chocolate", desc: "Đậm vị chocolate, mềm ở giữa", price: 40000, image: null },
+  { id: "p5", category: "cookie", emoji: "🍯", name: "Biscoff", desc: "Thơm bơ caramel kiểu Bỉ", price: 42000, image: "assets/cookie-bow-single.png" },
+  { id: "p6", category: "cookie", emoji: "💗", name: "Strawberry Cheesecake", desc: "Béo thơm vị cheesecake dâu", price: 42000, image: null },
+  { id: "m1", category: "mochi", emoji: "🍓", name: "Strawberry Mochi", desc: "Mochi dẻo với nhân dâu tươi", price: 45000, image: "assets/mochi-strawberry.png" },
+  { id: "m2", category: "mochi", emoji: "🍵", name: "Matcha Mochi", desc: "Nhân trà xanh thơm nhẹ", price: 45000, image: null },
+  { id: "m3", category: "mochi", emoji: "🥭", name: "Mango Mochi", desc: "Nhân xoài chua ngọt", price: 45000, image: null },
+  { id: "m4", category: "mochi", emoji: "🍫", name: "Chocolate Mochi", desc: "Nhân chocolate tan chảy", price: 45000, image: null },
+  { id: "m5", category: "mochi", emoji: "💜", name: "Taro Mochi", desc: "Nhân khoai môn béo bùi", price: 45000, image: null },
+  { id: "m6", category: "mochi", emoji: "🍪", name: "Cookies & Cream Mochi", desc: "Nhân cookie giòn kem béo", price: 48000, image: null },
+];
+
+class Component extends DCLogic {
+  state = {
+    category: "all",
+    isMobile: false,
+    mobileNavOpen: false,
+    modalProduct: null,
+    qty: 1,
+    itemNote: "",
+    cart: [],
+    cartOpen: false,
+    cartStep: "cart",
+    toast: null,
+    orderNote: "",
+    form: { name: "", phone: "", date: "", method: "Tự đến lấy" },
+    copied: false,
+  };
+
+  componentDidMount() {
+    this.updateIsMobile();
+    this._onResize = () => this.updateIsMobile();
+    window.addEventListener("resize", this._onResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
+  }
+
+  updateIsMobile() {
+    const isMobile = window.innerWidth < 860;
+    if (isMobile !== this.state.isMobile) this.setState({ isMobile, mobileNavOpen: false });
+  }
+
+  scrollToId(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const y = el.getBoundingClientRect().top + window.scrollY - 78;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+
+  formatPrice(n) {
+    return n.toLocaleString("vi-VN") + "đ / cái";
+  }
+
+  cartLines() {
+    return this.state.cart.map((it) => `${it.name} × ${it.qty}${it.note ? ` (${it.note})` : ""}`);
+  }
+
+  buildSummaryText() {
+    if (this.state.cart.length === 0) return "";
+    const f = this.state.form;
+    const lines = ["PUNNY COOKIES ♡", "", ...this.cartLines(), "", f.date ? `Ngày nhận: ${f.date}` : "Ngày nhận: (chưa chọn)", `Phương thức: ${f.method}`, "", `Tên: ${f.name || "..."}`, `SĐT: ${f.phone || "..."}`];
+    if (this.state.orderNote) lines.push("", "Ghi chú:", this.state.orderNote);
+    return lines.join("\n");
+  }
+
+  addToCartItem() {
+    const p = this.state.modalProduct;
+    if (!p) return;
+    const qty = this.state.qty;
+    const note = this.state.itemNote;
+    this.setState((s) => {
+      const existing = s.cart.find((it) => it.productId === p.id);
+      let cart;
+      if (existing) {
+        cart = s.cart.map((it) => (it.productId === p.id ? { ...it, qty: it.qty + qty, note: note || it.note } : it));
+      } else {
+        cart = [...s.cart, { productId: p.id, name: p.name, emoji: p.emoji, image: p.image, price: p.price, qty, note }];
+      }
+      return { cart, modalProduct: null, qty: 1, itemNote: "", toast: `Đã thêm ${p.name} vào giỏ ♡` };
+    });
+    clearTimeout(this._toastTimer);
+    this._toastTimer = setTimeout(() => this.setState({ toast: null }), 1800);
+  }
+
+  renderVals() {
+    const cat = this.state.category;
+    const pillStyle = (key) => {
+      const active = cat === key;
+      return {
+        bg: active ? "#F06A73" : "#FFFFFF",
+        color: active ? "#FFF9F0" : "#6B4638",
+        border: active ? "#F06A73" : "#F9C6C4",
+      };
+    };
+    const categories = [
+      { key: "all", label: "Tất cả", ...pillStyle("all"), select: () => this.setState({ category: "all" }) },
+      { key: "cookie", label: "Cookies", ...pillStyle("cookie"), select: () => this.setState({ category: "cookie" }) },
+      { key: "mochi", label: "Mochi", ...pillStyle("mochi"), select: () => this.setState({ category: "mochi" }) },
+    ];
+
+    const filtered = PRODUCTS.filter((p) => cat === "all" || p.category === cat).map((p) => ({
+      ...p,
+      priceLabel: this.formatPrice(p.price),
+      noImage: !p.image,
+      open: () => this.setState({ modalProduct: p, qty: 1, itemNote: "" }),
+    }));
+
+    const modalProduct = this.state.modalProduct
+      ? { ...this.state.modalProduct, priceLabel: this.formatPrice(this.state.modalProduct.price), noImage: !this.state.modalProduct.image }
+      : null;
+
+    return {
+      isMobile: this.state.isMobile,
+      isDesktopNav: !this.state.isMobile,
+      mobileNavOpen: this.state.mobileNavOpen,
+      bottomPad: this.state.isMobile ? "76px" : "0px",
+      floatingBottomOffset: this.state.isMobile ? "88px" : "22px",
+      footerBottomPad: this.state.isMobile ? "92px" : "36px",
+      toggleMobileNav: () => this.setState((s) => ({ mobileNavOpen: !s.mobileNavOpen })),
+      scrollToTop: () => window.scrollTo({ top: 0, behavior: "smooth" }),
+      scrollToMenu: () => this.scrollToId("menu"),
+      navMenu: (e) => { e.preventDefault(); this.setState({ mobileNavOpen: false }); this.scrollToId("menu"); },
+      navHow: (e) => { e.preventDefault(); this.setState({ mobileNavOpen: false }); this.scrollToId("how"); },
+      navAbout: (e) => { e.preventDefault(); this.setState({ mobileNavOpen: false }); this.scrollToId("about"); },
+      navContact: (e) => { e.preventDefault(); this.setState({ mobileNavOpen: false }); this.scrollToId("contact"); },
+
+      categories,
+      filteredProducts: filtered,
+
+      modalProduct,
+      modalDetailSlotId: modalProduct ? modalProduct.id + "-detail" : "modal-detail",
+      isStepDetail: true,
+      closeModal: () => this.setState({ modalProduct: null }),
+      stopClick: (e) => e.stopPropagation(),
+      qty: this.state.qty,
+      incQty: () => this.setState((s) => ({ qty: s.qty + 1 })),
+      decQty: () => this.setState((s) => ({ qty: Math.max(1, s.qty - 1) })),
+      itemNote: this.state.itemNote,
+      onItemNoteChange: (e) => this.setState({ itemNote: e.target.value }),
+      addToCart: () => this.addToCartItem(),
+
+      toast: this.state.toast,
+
+      cartOpen: this.state.cartOpen,
+      openCart: () => this.setState({ cartOpen: true, cartStep: "cart" }),
+      closeCartModal: () => this.setState({ cartOpen: false }),
+      isCartStepList: this.state.cartStep === "cart",
+      isCartStepForm: this.state.cartStep === "form",
+      isCartStepSummary: this.state.cartStep === "summary",
+      goToCartForm: () => this.setState({ cartStep: "form" }),
+      backToCart: () => this.setState({ cartStep: "cart" }),
+      goToCartSummary: () => this.setState({ cartStep: "summary" }),
+
+      cartCount: this.state.cart.reduce((sum, it) => sum + it.qty, 0),
+      cartIsEmpty: this.state.cart.length === 0,
+      cartHasItems: this.state.cart.length > 0,
+      cartTotalLabel: this.formatPrice(this.state.cart.reduce((sum, it) => sum + it.price * it.qty, 0)).replace(" / cái", ""),
+      cartLinesText: this.cartLines().join("\n"),
+      cartItems: this.state.cart.map((it) => ({
+        ...it,
+        priceLabel: this.formatPrice(it.price),
+        inc: () => this.setState((s) => ({ cart: s.cart.map((c) => (c.productId === it.productId ? { ...c, qty: c.qty + 1 } : c)) })),
+        dec: () => this.setState((s) => ({ cart: s.cart.map((c) => (c.productId === it.productId ? { ...c, qty: Math.max(1, c.qty - 1) } : c)) })),
+        remove: () => this.setState((s) => ({ cart: s.cart.filter((c) => c.productId !== it.productId) })),
+      })),
+
+      form: this.state.form,
+      onFormChange_name: (e) => this.setState((s) => ({ form: { ...s.form, name: e.target.value } })),
+      onFormChange_phone: (e) => this.setState((s) => ({ form: { ...s.form, phone: e.target.value } })),
+      onFormChange_date: (e) => this.setState((s) => ({ form: { ...s.form, date: e.target.value } })),
+      onFormChange_method: (e) => this.setState((s) => ({ form: { ...s.form, method: e.target.value } })),
+      orderNote: this.state.orderNote,
+      onOrderNoteChange: (e) => this.setState({ orderNote: e.target.value }),
+
+      summaryText: this.buildSummaryText(),
+      copyLabel: this.state.copied ? "Đã copy ✓" : "Copy đơn hàng 📋",
+      copySummary: () => {
+        const text = this.buildSummaryText();
+        if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+        this.setState({ copied: true });
+        setTimeout(() => this.setState({ copied: false }), 2000);
+      },
+      openFacebook: () => window.open(FACEBOOK_PAGE_URL, "_blank"),
+      openZalo: () => window.open(ZALO_CONTACT_URL, "_blank"),
+    };
+  }
+}
+
+</script>
+</body>
+</html>
