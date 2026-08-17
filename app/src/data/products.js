@@ -14,7 +14,7 @@ export const PRODUCTS = [
     name: "Chocolate Chip",
     desc: "Soft • Chewy • Chocolatey",
     price: 35000,
-    image: "/assets/cookie-chocolate-chip.png",
+    image: "assets/cookie-chocolate-chip.png",
   },
   {
     id: "p2",
@@ -23,7 +23,7 @@ export const PRODUCTS = [
     name: "Matcha White Chocolate",
     desc: "Trà xanh béo ngậy, phủ chocolate trắng",
     price: 42000,
-    image: "/assets/cookie-matcha.png",
+    image: "assets/cookie-matcha.png",
   },
   {
     id: "p3",
@@ -50,7 +50,7 @@ export const PRODUCTS = [
     name: "Biscoff",
     desc: "Thơm bơ caramel kiểu Bỉ",
     price: 42000,
-    image: "/assets/cookie-bow-single.png",
+    image: "assets/cookie-bow-single.png",
   },
   {
     id: "p6",
@@ -68,7 +68,7 @@ export const PRODUCTS = [
     name: "Strawberry Mochi",
     desc: "Mochi dẻo với nhân dâu tươi",
     price: 45000,
-    image: "/assets/mochi-strawberry.png",
+    image: "assets/mochi-strawberry.png",
   },
   {
     id: "m2",

@@ -29,6 +29,18 @@ Categories shown as filter pills are defined in the same file (`CATEGORIES`).
 Real Facebook Page / Zalo URLs go in [`src/config.js`](src/config.js) —
 currently placeholders (`https://m.me/PunnyCookies`, `https://zalo.me/PunnyCookies`).
 
+## Deploying to GitHub Pages
+
+Live at: https://ssjbluedev.github.io/punny-cookies/
+
+```bash
+npm run deploy   # builds and pushes dist/ to the gh-pages branch
+```
+
+`vite.config.js` uses `base: './'` and all asset paths in `src/` are relative
+(no leading `/`) so the build works whether it's served from a domain root or
+a GitHub Pages project subpath like `/punny-cookies/`.
+
 ## Structure
 
 - `src/data/products.js` — menu data (edit this to update the catalog)

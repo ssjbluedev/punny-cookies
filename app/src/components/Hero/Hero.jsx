@@ -27,12 +27,12 @@ export default function Hero() {
       <div className="pc-hero-art-wrap">
         <div className="pc-hero-art">
           <img
-            src="/assets/bunny-hero.png"
+            src="assets/bunny-hero.png"
             alt="Bunny mascot eating a cookie"
             className="pc-hero-art-main"
           />
           <img
-            src="/assets/hero-bow-accent.png"
+            src="assets/hero-bow-accent.png"
             alt=""
             className="pc-hero-accent pc-float-1"
           />

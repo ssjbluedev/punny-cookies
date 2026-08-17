@@ -6,7 +6,7 @@ export default function About() {
       <div className="pc-about-pattern" />
       <div className="pc-about-inner">
         <div className="pc-about-art">
-          <img src="/assets/bunny-small.png" alt="Bunny mascot" />
+          <img src="assets/bunny-small.png" alt="Bunny mascot" />
         </div>
         <div className="pc-about-copy">
           <h2>Made with love ♡</h2>

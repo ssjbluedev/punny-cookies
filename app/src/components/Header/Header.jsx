@@ -31,7 +31,7 @@ export default function Header({ isMobile, onOpenCart }) {
     <>
       <header className="pc-header">
         <div className="pc-brand" onClick={scrollToTop}>
-          <img src="/assets/logo-small.png" alt="Punny Cookies logo" className="pc-brand-logo" />
+          <img src="assets/logo-small.png" alt="Punny Cookies logo" className="pc-brand-logo" />
           <span className="pc-brand-name">Punny Cookies</span>
         </div>
 
