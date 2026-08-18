@@ -1,0 +1,74 @@
+{
+  "items": [
+    {
+      "id": "tiramisu",
+      "name": "Cookie tiramisu",
+      "description": "Cookie cà phê với kem mascarpone và bột cacao.",
+      "type": "cookie",
+      "image": "tiramisu.jpg"
+    },
+    {
+      "id": "creami_berri",
+      "name": "Creami Berri",
+      "description": "Cookie vị dâu với dâu tây sấy lạnh và chocolate trắng.",
+      "type": "cookie",
+      "image": "creami_berri.jpg"
+    },
+    {
+      "id": "hojicha_bliss",
+      "name": "Hojicha Bliss",
+      "description": "Cookie vị hojicha với chocolate trắng.",
+      "type": "cookie",
+      "image": "hojicha_bliss.jpg"
+    },
+    {
+      "id": "triple_choco_smore",
+      "name": "Triple Choco S'More",
+      "description": "Cookie cacao đen với marshmallow và chocolate trắng.",
+      "type": "cookie",
+      "image": "triple_choco_smore.jpg"
+    },
+    {
+      "id": "strawberry_mochi",
+      "name": "Mochi dâu tây",
+      "description": "Mochi vị dâu tây với nhân sốt dâu.",
+      "type": "mochi",
+      "image": "strawberry_mochi.jpg"
+    },
+    {
+      "id": "matcha_mochi",
+      "name": "Mochi matcha",
+      "description": "Mochi matcha phủ bột mịn, dùng kèm sốt matcha.",
+      "type": "mochi",
+      "image": "matcha_mochi.jpg"
+    },
+    {
+      "id": "chocolate_mochi",
+      "name": "Mochi chocolate",
+      "description": "Mochi chocolate phủ bột cacao, dùng kèm sốt chocolate.",
+      "type": "mochi",
+      "image": "chocolate_mochi.jpg"
+    },
+    {
+      "id": "vanilla_mochi",
+      "name": "Mochi vanilla",
+      "description": "Mochi vị sữa/vanilla phủ bột mịn, dùng kèm sốt kem.",
+      "type": "mochi",
+      "image": "vanilla_mochi.jpg"
+    },
+    {
+      "id": "mango_mochi",
+      "name": "Mochi xoài",
+      "description": "Mochi xoài phủ bột mịn, dùng kèm sốt xoài.",
+      "type": "mochi",
+      "image": "mango_mochi.jpg"
+    },
+    {
+      "id": "cookies_cream_mochi",
+      "name": "Mochi cookies & cream",
+      "description": "Mochi cookies & cream phủ bột mịn, dùng kèm sốt kem.",
+      "type": "mochi",
+      "image": "cookies_cream_mochi.jpg"
+    }
+  ]
+}
