@@ -14,6 +14,7 @@ import ProductModal from "./components/ProductModal/ProductModal";
 import CartModal from "./components/CartModal/CartModal";
 import Toast from "./components/Toast/Toast";
 import ScrollToTopButton from "./components/ScrollToTopButton/ScrollToTopButton";
+import FloatingCartButton from "./components/FloatingCartButton/FloatingCartButton";
 import "./App.css";
 
 export default function App() {
@@ -40,6 +41,7 @@ export default function App() {
       )}
       {cartOpen && <CartModal onClose={() => setCartOpen(false)} />}
       <Toast />
+      {isMobile && <FloatingCartButton onOpenCart={() => setCartOpen(true)} />}
       <ScrollToTopButton isMobile={isMobile} />
     </CartProvider>
   );
