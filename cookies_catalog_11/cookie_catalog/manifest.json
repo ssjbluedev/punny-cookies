@@ -1,0 +1,136 @@
+{
+  "schema_version": "1.0",
+  "catalog_name": "COOKIES - 11 loại bánh",
+  "created_date": "2026-08-20",
+  "currency": "VND",
+  "item_count": 11,
+  "source_document": "COOKIES.docx",
+  "notes": [
+    "Tên, giá bán, khối lượng và mô tả được đối chiếu từ COOKIES.docx.",
+    "Ảnh image_source.type=provided là ảnh người dùng gửi; docx_embedded là ảnh trích từ file Word; generated_supplement là ảnh bổ sung cho món chưa có ảnh riêng.",
+    "Giá trị price_display được giữ theo cách viết trong file Word; price_vnd là giá trị chuẩn hóa để xử lý bằng máy."
+  ],
+  "items": [
+    {
+      "id": 1,
+      "name": "Matcha crinkle",
+      "price_display": "10k",
+      "price_vnd": 10000,
+      "weight_g": null,
+      "description": null,
+      "image": "images/01_matcha_crinkle.png",
+      "image_source": {"type": "docx_embedded", "source": "word/media/image1.png"},
+      "sha256": "3121f432fa5dcbb69efaf3f97bd39638e43265171b000fc188835c9441b8bf9d"
+    },
+    {
+      "id": 2,
+      "name": "Chocolate crinkle",
+      "price_display": "10k",
+      "price_vnd": 10000,
+      "weight_g": null,
+      "description": null,
+      "image": "images/02_chocolate_crinkle.png",
+      "image_source": {"type": "provided", "source": "01_chocolate_crinkle.png"},
+      "sha256": "16425a3f5b1def8f8bc59fdc4c1799a6c3e8eeb5b37b2f3d2d646c81679b58b7"
+    },
+    {
+      "id": 3,
+      "name": "Lemon crinkle",
+      "price_display": "10k",
+      "price_vnd": 10000,
+      "weight_g": null,
+      "description": null,
+      "image": "images/03_lemon_crinkle.png",
+      "image_source": {"type": "provided", "source": "02_lemon_crinkle.png"},
+      "sha256": "c363b1a147e9a2b579f87ec50d5e5dc7996ceada844ef5b7e2cff470a74f6aae"
+    },
+    {
+      "id": 4,
+      "name": "Chocolate chip cookie",
+      "price_display": "18k",
+      "price_vnd": 18000,
+      "weight_g": 45,
+      "description": null,
+      "image": "images/04_chocolate_chip_cookie.png",
+      "image_source": {"type": "docx_embedded", "source": "word/media/image2.png"},
+      "sha256": "7ac5fcb50196235c28c50eed8a045725e5f3f9fa1b9a0b9013c31064ca9a25c3"
+    },
+    {
+      "id": 5,
+      "name": "Cream Cheese Crinkle",
+      "price_display": "25k",
+      "price_vnd": 25000,
+      "weight_g": 45,
+      "description": null,
+      "image": "images/05_cream_cheese_crinkle.png",
+      "image_source": {"type": "provided", "source": "03_cream_cheese_crinkle.png"},
+      "sha256": "f30c96b769aae3267a6033ab3d5c99c506d73f5abfbf04bee7c091540e5b5fb8"
+    },
+    {
+      "id": 6,
+      "name": "Red Velvet crinkle nhân kem cheese",
+      "price_display": "22K",
+      "price_vnd": 22000,
+      "weight_g": 45,
+      "description": "Crinkle red velvet kết hợp với nhân kem phô mai",
+      "image": "images/06_red_velvet_crinkle_cream_cheese.png",
+      "image_source": {"type": "provided", "source": "04_red_velvet_crinkle_cream_cheese.png"},
+      "sha256": "e1bc757628be6ea9a276116dbf170b15c0cc2dc1f2c26bb640a8f1a90079b8b4"
+    },
+    {
+      "id": 7,
+      "name": "Matcha crinkle nhân kem cheese",
+      "price_display": "22K",
+      "price_vnd": 22000,
+      "weight_g": null,
+      "description": null,
+      "image": "images/07_matcha_crinkle_cream_cheese.png",
+      "image_source": {"type": "provided", "source": "05_matcha_crinkle_cream_cheese.png"},
+      "sha256": "92af05a44d468f0444c012ada88167aebf27af8eaffb2d4f609fa40c9274cbc2"
+    },
+    {
+      "id": 8,
+      "name": "Chocolate crinkle nhân socola",
+      "price_display": "22K",
+      "price_vnd": 22000,
+      "weight_g": null,
+      "description": null,
+      "image": "images/08_chocolate_crinkle_chocolate_filling.png",
+      "image_source": {"type": "generated_supplement", "source": "generated to complete catalog"},
+      "sha256": "77a801f531c3ef666a589d52fb8493d2ecfc52e4de31974a368a0cc3351b97e7"
+    },
+    {
+      "id": 9,
+      "name": "Lemon crinkle nhân kem cheese",
+      "price_display": "22K",
+      "price_vnd": 22000,
+      "weight_g": null,
+      "description": null,
+      "image": "images/09_lemon_crinkle_cream_cheese.png",
+      "image_source": {"type": "generated_supplement", "source": "generated to complete catalog"},
+      "sha256": "c757b2e43e98c6a526da15e9c6f96e08c3518022955f1445491b0dd76f8ec251"
+    },
+    {
+      "id": 10,
+      "name": "Oreo crumbl Cookie",
+      "price_display": "26k",
+      "price_vnd": 26000,
+      "weight_g": {"min": 45, "max": 50},
+      "description": "Bánh quy kết hợp với kem cheese và vụn Oreo",
+      "image": "images/10_oreo_crumbl_cookie.png",
+      "image_source": {"type": "docx_embedded", "source": "word/media/image5.png"},
+      "sha256": "ffcce3e7d9c53e44d3d3e6ba981fe7bfcf2863560bb2c68548e8559221b879c1"
+    },
+    {
+      "id": 11,
+      "name": "Oreo matcha cookie",
+      "price_display": "26k",
+      "price_vnd": 26000,
+      "weight_g": null,
+      "description": null,
+      "image": "images/11_oreo_matcha_cookie.png",
+      "image_source": {"type": "generated_supplement", "source": "generated to complete catalog"},
+      "sha256": "2805ee068851ea79243366da238463797baa91ce7fa9b8199b53887cc5ae2850"
+    }
+  ]
+}
